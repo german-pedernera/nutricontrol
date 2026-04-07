@@ -367,16 +367,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Manejo del Menú Responsivo (Hamburguesa)
+
+// --- ACTUALIZACIÓN DE IMC EN VIVO (ficha.html) ---
+const inputPeso = document.getElementById('peso');
+const inputTalla = document.getElementById('talla');
+const displayIMC = document.getElementById('valIMC');
+
+if (inputPeso && inputTalla && displayIMC) {
+    const actualizarIMCRealTime = () => {
+        const p = parseFloat(inputPeso.value);
+        const t = parseFloat(inputTalla.value);
+        displayIMC.innerText = calcularIMC(p, t);
+    };
+
+    inputPeso.addEventListener('input', actualizarIMCRealTime);
+    inputTalla.addEventListener('input', actualizarIMCRealTime);
+}
+
+// --- ACTUALIZACIÓN DE IMC EN VIVO PARA FICHA ---
+
+if (inputPeso && inputTalla && displayIMC) {
+    const actualizarIMCRealTime = () => {
+        const p = parseFloat(inputPeso.value);
+        const t = parseFloat(inputTalla.value);
+        // Reutiliza tu función calcularIMC definida al inicio de script.js
+        displayIMC.innerText = calcularIMC(p, t);
+    };
+
+    // Escuchar cambios mientras el usuario escribe
+    inputPeso.addEventListener('input', actualizarIMCRealTime);
+    inputTalla.addEventListener('input', actualizarIMCRealTime);
+}
+
+// --- MANEJO ÚNICO DEL MENÚ RESPONSIVO ---
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
 
     if (menuToggle && navMenu) {
-        menuToggle.addEventListener('click', () => {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita problemas de propagación
             navMenu.classList.toggle('active');
             
-            // Animación del icono
             const icon = menuToggle.querySelector('i');
             if (navMenu.classList.contains('active')) {
                 icon.classList.replace('fa-bars', 'fa-times');

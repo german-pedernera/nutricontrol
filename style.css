@@ -173,3 +173,72 @@ input, textarea {
     .sidebar, .no-print { display: none !important; }
     .main-content { margin-left: 0 !important; margin-top: 0 !important; width: 100%; }
 }
+
+/* Asegúrate de que el menú se despliegue verticalmente cuando esté activo */
+.nav-menu.active { 
+    display: flex !important; /* Forzamos el display para evitar conflictos */
+    flex-direction: column;
+    background: var(--primary);
+    width: 100%;
+    position: absolute;
+    top: 60px; /* Ajusta según el alto de tu logo-container */
+    left: 0;
+    padding: 10px 20px;
+}
+
+@media (max-width: 767px) {
+    .sidebar {
+        flex-direction: row; /* Para que el logo y el botón estén en línea */
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        min-height: 60px;
+    }
+    
+    .logo-container {
+        margin-bottom: 0; /* Quitar el margen que usas en PC */
+    }
+}
+
+/* --- NAVEGACIÓN MÓVIL (Corrección) --- */
+@media (max-width: 767px) {
+    .sidebar {
+        flex-direction: row !important; /* Cambia de columna a fila */
+        justify-content: space-between;
+        align-items: center;
+        height: 70px; /* Altura fija para la barra superior */
+        padding: 10px 20px;
+    }
+
+    .logo-container {
+        margin-bottom: 0; /* Elimina margen de PC */
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .logo-redondo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .menu-toggle {
+        position: static; /* Quita el absolute para que respete el space-between */
+        display: block;
+    }
+
+    .nav-menu {
+        display: none; 
+        position: absolute;
+        top: 70px; /* Justo debajo de la barra */
+        left: 0;
+        width: 100%;
+        background: var(--primary);
+        padding: 20px;
+        flex-direction: column;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-menu.active {
+        display: flex !important;
+    }
+}
