@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso NutriControl</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="/nutricion.png" type="image/x-icon">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #27ae60;
+            --bg-color: #f4f7f6;
+        }
+
+        body { 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            display: flex; 
+            background: var(--bg-color); 
+            margin: 0; 
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .login-box { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 15px; 
+            width: 100%; 
+            max-width: 350px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+        }
+
+        /* Estilos para el logo redondo */
+        .logo-redondo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover; /* Mantiene la proporción de la imagen */
+            border: 3px solid var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .form-group { margin-bottom: 20px; position: relative; }
+        
+        .form-group label { 
+            display: block; 
+            margin-bottom: 8px; 
+            color: var(--primary-color); 
+            font-weight: 600;
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-container i {
+            position: absolute;
+            left: 12px;
+            color: #95a5a6;
+        }
+
+        .input-container input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-container input:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #219150;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <img src="/logo.jpeg" alt="Logo NutriControl" class="logo-redondo">
+            <h2 style="margin-top: 10px; color: var(--primary-color); letter-spacing: 1px;">NutriControl</h2>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Usuario</label>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="userInput" placeholder="Usuario" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="passInput" placeholder="Contraseña" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login">
+                INGRESAR
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const u = document.getElementById('userInput').value;
+            const p = document.getElementById('passInput').value;
+
+            // Validación simple (puedes ajustarla según necesites)
+            if(u === 'Nutricion' && p === 'Nutri2026') {
+                window.location.href = 'dashboard.html';
+            } else {
+                alert("Usuario o Contraseña incorrectos.");
+            }
+        });
+    </script>
+
+</body>
+</html>
