@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial Clínico - NutriControl</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="/nutricion.png" type="image/x-icon">
+</head>
+<body>
+<nav class="sidebar">
+    <button class="menu-toggle no-print" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="logo-container" id="logoContainer">
+        <img src="logo.jpeg" alt="Logo" class="logo-redondo">
+        <h2>NutriControl</h2>
+    </div>
+    
+    <div class="nav-menu" id="navMenu">
+        <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> <span>Inicio</span></a>
+        <a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> <span>Nuevo Usuario</span></a>
+        <a href="ficha.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Ver Fichas</span></a>
+        <a href="estadistica.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Estadística</span></a>
+        
+        <button class="nav-link" onclick="cerrarSesion()" style="width: 100%; margin-top: auto; border: none; background: #c0392b; cursor: pointer;">
+            <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+    </div>
+</nav>
+
+    <script>
+        function cerrarSesion() { window.location.href = 'login.html'; }
+    </script>
+
+    <main class="main-content">
+        <header style="border-bottom: 2px solid var(--primary); padding-bottom: 15px; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <h1 style="margin: 0;">Historial Clínico: <span id="nombrePaciente"></span></h1>
+                    <p style="font-size: 1.1rem; margin: 5px 0;">
+                        <strong>DNI:</strong> <span id="dniPaciente"></span> | 
+                        <strong>CE:</strong> <span id="cePaciente"></span>
+                    </p>
+                </div>
+                <button onclick="window.print()" class="nav-link no-print" style="background: #34495e; border:none; cursor:pointer;">
+                    <i class="fas fa-print"></i> Imprimir Reporte / PDF
+                </button>
+            </div>
+        </header>
+
+        <div id="listaHistorial" style="margin-top: 20px;">
+            <p>Cargando antecedentes...</p>
+        </div>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

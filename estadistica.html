@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas - NutriControl</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="/nutricion.png" type="image/x-icon">
+</head>
+<body>
+<nav class="sidebar">
+    <button class="menu-toggle no-print" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="logo-container" id="logoContainer">
+        <img src="logo.jpeg" alt="Logo" class="logo-redondo">
+        <h2>NutriControl</h2>
+    </div>
+    
+    <div class="nav-menu" id="navMenu">
+        <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> <span>Inicio</span></a>
+        <a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> <span>Nuevo Usuario</span></a>
+        <a href="ficha.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Ver Fichas</span></a>
+        <a href="estadistica.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Estadística</span></a>
+        
+        <button class="nav-link" onclick="cerrarSesion()" style="width: 100%; margin-top: auto; border: none; background: #c0392b; cursor: pointer;">
+            <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+    </div>
+</nav>
+
+    <script>
+        function cerrarSesion() { window.location.href = 'login.html'; }
+    </script>
+
+    <main class="main-content">
+        <h1>Análisis de Datos</h1>
+
+        <section class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3><i class="fas fa-users"></i> Estado General del Personal</h3>
+                <button id="btnDescargarGeneral" class="btn-accion" style="background: var(--primary); padding: 8px 15px; font-size: 0.8rem;">
+                    <i class="fas fa-download"></i> Descargar Imagen
+                </button>
+            </div>
+            <div style="max-height: 300px;">
+                <canvas id="chartGeneral"></canvas>
+            </div>
+        </section>
+
+        <section class="card">
+            <h3><i class="fas fa-chart-line"></i> Evolución Detallada por Paciente</h3>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;" class="no-print">
+                <input type="text" id="busquedaDNI" placeholder="Ingrese DNI para ver evolución..." style="flex-grow: 1;">
+                <button id="btnVerEvolucion" class="btn-accion" style="background:var(--primary)">
+                    <i class="fas fa-sync"></i> Generar Reporte
+                </button>
+                <button id="btnDescargarReporteCombinado" class="btn-accion" style="background: var(--secondary); display: none;">
+                    <i class="fas fa-file-image"></i> Descargar Reporte Combinado (PNG)
+                </button>
+            </div>
+            
+            <h4 id="nombrePacienteEvolucion" style="color: var(--secondary); text-align: center; margin-bottom: 20px;"></h4>
+            
+            <div class="grid-graficos">
+                <div class="chart-container"><canvas id="chartAgua"></canvas></div>
+                <div class="chart-container"><canvas id="chartGrasa"></canvas></div>
+                <div class="chart-container"><canvas id="chartOsea"></canvas></div>
+                <div class="chart-container"><canvas id="chartMusculo"></canvas></div>
+                <div class="chart-container"><canvas id="chartIMC"></canvas></div>
+                <div class="chart-container"><canvas id="chartPeso"></canvas></div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Clínica - NutriControl</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="/nutricion.png" type="image/x-icon">
+</head>
+<body>
+<nav class="sidebar">
+    <button class="menu-toggle no-print" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="logo-container" id="logoContainer">
+        <img src="logo.jpeg" alt="Logo" class="logo-redondo">
+        <h2>NutriControl</h2>
+    </div>
+    
+    <div class="nav-menu" id="navMenu">
+        <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> <span>Inicio</span></a>
+        <a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> <span>Nuevo Usuario</span></a>
+        <a href="ficha.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Ver Fichas</span></a>
+        <a href="estadistica.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Estadística</span></a>
+        
+        <button class="nav-link" onclick="cerrarSesion()" style="width: 100%; margin-top: auto; border: none; background: #c0392b; cursor: pointer;">
+            <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+    </div>
+</nav>
+
+    <script>
+        function cerrarSesion() { window.location.href = 'login.html'; }
+    </script>
+
+    <main class="main-content">
+        <div class="no-print">
+            <h1>Buscador de Paciente para Actualizar Ficha</h1>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="busquedaDNI" placeholder="DNI del paciente...">
+                <button id="btnBuscar" class="nav-link" style="background: var(--primary); border:none; cursor:pointer;">Filtrar</button>
+            </div>
+        </div>
+
+        <form id="formEdicion" style="display:none; margin-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Paciente: <span id="nombreTitulo"></span></h2>
+                <button type="button" id="btnVerHistorial" class="nav-link" style="background: #3498db; border:none; cursor:pointer;">
+                    <i class="fas fa-history"></i> Ver Historial Completo
+                </button>
+            </div>
+
+            <section class="card">
+                <h3>Datos Personales y de Contacto</h3>
+                <div class="grid-3">
+                    <div class="form-group"><label>Jerarquía</label><input type="text" id="jerarquia"></div>
+                    <div class="form-group"><label>Nombre</label><input type="text" id="nombre"></div>
+                    <div class="form-group"><label>DNI</label><input type="text" id="dni" readonly></div>
+                    
+                    <div class="form-group"><label>CE (Credencial Estadística)</label><input type="text" id="ce"></div>
+                    <div class="form-group"><label>Teléfono Particular</label><input type="tel" id="telefono"></div>
+                </div>
+
+                <h3>Medición Actual</h3>
+                <div class="grid-3">
+                    <div class="form-group"><label>Peso (kg)</label><input type="number" step="0.1" id="peso"></div>
+                    <div class="form-group"><label>Talla (m)</label><input type="number" step="0.01" id="talla"></div>
+                    <div class="form-group"><label>IMC</label><div id="valIMC" style="font-weight:bold; color:var(--secondary); font-size: 1.5rem;">0.00</div></div>
+                </div>
+                <div class="grid-3">
+                    <div class="form-group"><label>% Músculo</label><input type="number" step="0.1" id="musculo"></div>
+                    <div class="form-group"><label>% Grasa</label><input type="number" step="0.1" id="grasa"></div>
+                    <div class="form-group"><label>kg Masa Ósea</label><input type="number" step="0.1" id="osea"></div>
+                    <div class="form-group"><label>% Agua Corporal</label><input type="number" step="0.1" id="agua"></div>
+                </div>
+                <div class="form-group">
+                    <label>Observaciones de esta consulta</label>
+                    <textarea id="novedades" rows="3"></textarea>
+                </div>
+                <button type="submit" class="nav-link" style="background: var(--secondary); border:none; cursor:pointer; width: 100%; justify-content: center;">
+                    <i class="fas fa-save"></i> Guardar Nueva Entrada en Historial
+                </button>
+            </section>
+        </form>
+    </main>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal - NutriControl</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="/nutricion.png" type="image/x-icon">
+</head>
+<body>
+
+<nav class="sidebar">
+    <button class="menu-toggle no-print" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="logo-container" id="logoContainer">
+        <img src="logo.jpeg" alt="Logo" class="logo-redondo">
+        <h2>NutriControl</h2>
+    </div>
+    
+    <div class="nav-menu" id="navMenu">
+        <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> <span>Inicio</span></a>
+        <a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> <span>Nuevo Usuario</span></a>
+        <a href="ficha.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Ver Fichas</span></a>
+        <a href="estadistica.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Estadística</span></a>
+        
+        <button class="nav-link" onclick="cerrarSesion()" style="width: 100%; margin-top: auto; border: none; background: #c0392b; cursor: pointer;">
+            <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+    </div>
+</nav>
+
+    <script>
+        function cerrarSesion() { window.location.href = 'login.html'; }
+    </script>
+
+    <main class="main-content">
+        <header>
+            <h1>Bienvenido, Nutricionista</h1>
+            <p>Gestión de personal de Gendarmería Nacional</p>
+        </header>
+
+        <section class="card-container">
+            <div class="card" onclick="window.location.href='registro.html'" style="cursor: pointer;">
+                <i class="fas fa-user-edit" style="font-size: 3rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                <h3>Registrar Nuevo Usuario</h3>
+                <p>Carga de datos personales y medidas iniciales.</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='ficha.html'" style="cursor: pointer;">
+                <i class="fas fa-file-medical-alt" style="font-size: 3rem; color: #3498db; margin-bottom: 15px;"></i>
+                <h3>Ver Ficha Clínica</h3>
+                <p>Buscador en vivo y evolución de pacientes.</p>
+            </div>
+        </section>
+
+        <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
+
+        <section class="card" style="max-width: 800px; margin: 20px auto;">
+    <h3><i class="fas fa-calculator"></i> Calculadora de IMC Rápida</h3>
+    
+    <div class="grid-3" style="margin-top: 15px;">
+        <div class="form-group">
+            <label>Peso (kg)</label>
+            <input type="number" id="quickPeso" placeholder="Ej: 85" oninput="calcIMCDashboard()">
+        </div>
+        <div class="form-group">
+            <label>Talla (m)</label>
+            <input type="number" id="quickTalla" placeholder="Ej: 1.75" oninput="calcIMCDashboard()">
+        </div>
+        <div id="resultadoQuickIMC" style="padding: 10px; border-radius: 8px; background: #f9f9f9; text-align: center; border: 2px solid #ddd; display: flex; flex-direction: column; justify-content: center;">
+            <span style="font-weight: bold;">IMC: <span id="resValor">--</span></span>
+            <span id="resEstado" style="font-size: 0.8rem; font-weight: bold;">Ingrese datos</span>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <script>
+        function calcIMCDashboard() {
+            const p = parseFloat(document.getElementById('quickPeso').value);
+            const t = parseFloat(document.getElementById('quickTalla').value);
+            const resVal = document.getElementById('resValor');
+            const resEst = document.getElementById('resEstado');
+            const box = document.getElementById('resultadoQuickIMC');
+
+            if(p > 0 && t > 0) {
+                const imc = p / (t * t);
+                resVal.innerText = imc.toFixed(2);
+                
+                let estado = "";
+                let color = "";
+
+                if(imc < 18.5) { estado = "Bajo de peso"; color = "#3498db"; }
+                else if(imc < 25) { estado = "Normal"; color = "#27ae60"; }
+                else if(imc < 30) { estado = "Sobrepeso"; color = "#f1c40f"; }
+                else if(imc < 35) { estado = "Obesidad Grado I"; color = "#e67e22"; }
+                else if(imc < 40) { estado = "Obesidad Grado II"; color = "#d35400"; }
+                else { estado = "Obesidad Grado III"; color = "#c0392b"; }
+
+                resEst.innerText = estado;
+                box.style.borderColor = color;
+                resEst.style.color = color;
+            } else {
+                resVal.innerText = "--";
+                resEst.innerText = "Ingrese datos";
+                resEst.style.color = "inherit";
+                box.style.borderColor = "#ddd";
+            }
+        }
+    </script>
+</body>
+</html>
