@@ -22,8 +22,8 @@
     <div class="nav-menu" id="navMenu">
         <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> <span>Inicio</span></a>
         <a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> <span>Nuevo Usuario</span></a>
-        <a href="ficha.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Ver Fichas</span></a>
-        <a href="estadistica.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Estadística</span></a>
+        <a href="ficha.html" class="nav-link active"><i class="fas fa-address-book"></i> <span>Ver Fichas</span></a>
+        <a href="estadistica.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Estadísticas</span></a>
         
         <button class="nav-link" onclick="cerrarSesion()" style="width: 100%; margin-top: auto; border: none; background: #c0392b; cursor: pointer;">
             <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
@@ -31,27 +31,34 @@
     </div>
 </nav>
 
-        <script>
-            function cerrarSesion() { window.location.href = 'index.html'; }
-        </script>
+<script>
+    function cerrarSesion() { window.location.href = 'index.html'; }
+</script>
 
-    <main class="main-content">
-        <div class="no-print">
-            <h1>Buscador de Paciente para Actualizar Ficha</h1>
-            <div style="display: flex; gap: 10px;">
-                <input type="text" id="busquedaDNI" placeholder="DNI del paciente...">
-                <button id="btnBuscar" class="nav-link" style="background: var(--primary); border:none; cursor:pointer;">Filtrar</button>
-            </div>
+<main class="main-content">
+    <header class="no-print">
+        <h1>Buscador de Paciente</h1>
+        <p>Ingrese el DNI para actualizar la ficha o ver el historial del personal.</p>
+    </header>
+
+    <section class="card no-print">
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="busquedaDNI" placeholder="Ingrese DNI (ej: 35123456)..." style="flex-grow: 1;">
+            <button id="btnBuscar" class="btn-accion" style="background:var(--primary)">
+                <i class="fas fa-search"></i> Buscar
+            </button>
+        </div>
+    </section>
+
+    <div id="formEdicion" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 id="nombreTitulo" style="color: var(--primary);">Paciente</h2>
+            <button id="btnVerHistorial" class="btn-accion" style="background: #34495e; width: auto; padding: 10px 20px;">
+                <i class="fas fa-history"></i> Ver Historial Completo
+            </button>
         </div>
 
-        <form id="formEdicion" style="display:none; margin-top: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h2>Paciente: <span id="nombreTitulo"></span></h2>
-                <button type="button" id="btnVerHistorial" class="nav-link" style="background: #3498db; border:none; cursor:pointer;">
-                    <i class="fas fa-history"></i> Ver Historial Completo
-                </button>
-            </div>
-
+        <form id="updateForm">
             <section class="card">
                 <h3>Datos Personales y de Contacto</h3>
                 <div class="grid-3">
@@ -60,14 +67,30 @@
                     <div class="form-group"><label>DNI</label><input type="text" id="dni" readonly></div>
                     
                     <div class="form-group"><label>CE (Credencial Estadística)</label><input type="text" id="ce"></div>
+                    
+                    <div class="form-group">
+                        <label>Fecha de Nacimiento</label>
+                        <input type="date" id="fechaNacUpdate" readonly style="background: #eee;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Edad</label>
+                        <input type="text" id="edad" readonly style="background: #eee; font-weight: bold; color: var(--primary);">
+                    </div>
+
                     <div class="form-group"><label>Teléfono Particular</label><input type="tel" id="telefono"></div>
                 </div>
+            </section>
 
-                <h3>Medición Actual</h3>
+            <section class="card">
+                <h3>Nueva Medición de Composición Corporal</h3>
                 <div class="grid-3">
                     <div class="form-group"><label>Peso (kg)</label><input type="number" step="0.1" id="peso"></div>
                     <div class="form-group"><label>Talla (m)</label><input type="number" step="0.01" id="talla"></div>
-                    <div class="form-group"><label>IMC</label><div id="valIMC" style="font-weight:bold; color:var(--secondary); font-size: 1.5rem;">0.00</div></div>
+                    <div class="form-group">
+                        <label>IMC Actual</label>
+                        <div id="valIMC" style="font-weight:bold; color:var(--secondary); font-size: 1.5rem;">0.00</div>
+                    </div>
                 </div>
                 <div class="grid-3">
                     <div class="form-group"><label>% Músculo</label><input type="number" step="0.1" id="musculo"></div>
@@ -77,14 +100,17 @@
                 </div>
                 <div class="form-group">
                     <label>Observaciones de esta consulta</label>
-                    <textarea id="novedades" rows="3"></textarea>
+                    <textarea id="novedades" rows="3" placeholder="Indique cambios en la dieta o actividad física..."></textarea>
                 </div>
-                <button type="submit" class="nav-link" style="background: var(--secondary); border:none; cursor:pointer; width: 100%; justify-content: center;">
+                
+                <button type="submit" class="btn-accion" style="background: var(--secondary); width: 100%; justify-content: center;">
                     <i class="fas fa-save"></i> Guardar Nueva Entrada en Historial
                 </button>
             </section>
         </form>
-    </main>
-    <script type="module" src="script.js"></script>
+    </div>
+</main>
+
+<script type="module" src="script.js"></script>
 </body>
 </html>

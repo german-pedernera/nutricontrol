@@ -21,9 +21,9 @@
     
     <div class="nav-menu" id="navMenu">
         <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> <span>Inicio</span></a>
-        <a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> <span>Nuevo Usuario</span></a>
+        <a href="registro.html" class="nav-link active"><i class="fas fa-user-plus"></i> <span>Nuevo Usuario</span></a>
         <a href="ficha.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Ver Fichas</span></a>
-        <a href="estadistica.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Estadística</span></a>
+        <a href="estadistica.html" class="nav-link"><i class="fas fa-chart-line"></i> <span>Estadísticas</span></a>
         
         <button class="nav-link" onclick="cerrarSesion()" style="width: 100%; margin-top: auto; border: none; background: #c0392b; cursor: pointer;">
             <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
@@ -31,40 +31,64 @@
     </div>
 </nav>
 
-        <script>
-            function cerrarSesion() { window.location.href = 'index.html'; }
-        </script>
-    <main class="main-content">
-        <h1>Registro de Personal</h1>
-        <form id="registroForm">
-            <div class="card">
-                <h3>Datos Personales</h3>
-                <div class="grid-3">
-                    <div class="form-group"><label>Jerarquía</label><input type="text" id="jerarquia" required></div>
-                    <div class="form-group"><label>Nombre y Apellido</label><input type="text" id="nombre" required></div>
-                    <div class="form-group"><label>DNI</label><input type="text" id="dni" required></div>
-                    <div class="form-group"><label>CE</label><input type="text" id="ce" required></div>
-                    <div class="form-group"><label>F. Nacimiento</label><input type="date" id="fechaNac" required></div>
-                    <div class="form-group"><label>Teléfono</label><input type="tel" id="telefono" required></div>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Composición Corporal</h3>
-                <div class="grid-3">
-                    <div class="form-group"><label>Peso (kg)</label><input type="number" step="0.1" id="peso" required></div>
-                    <div class="form-group"><label>Talla (m)</label><input type="number" step="0.01" id="talla" required></div>
-                    <div class="form-group"><label>% Músculo</label><input type="number" step="0.1" id="musculo" required></div>
-                    <div class="form-group"><label>% Grasa</label><input type="number" step="0.1" id="grasa" required></div>
-                    <div class="form-group"><label>kg Masa Osea</label><input type="number" step="0.1" id="osea" required></div>
-                    <div class="form-group"><label>% Agua Corporal</label><input type="number" step="0.1" id="agua" required></div>
-                </div>
-                <!-- <h4>IMC Calculado: <span id="valIMC">0.00</span></h4> -->
-                <div class="form-group"><label>Novedades</label><textarea id="novedades"></textarea></div>
-            </div>
-            <button type="submit" class="btn-accion" style="background:var(--secondary)">Guardar Registro</button>
-        </form>
-    </main>
-    <script type="module" src="script.js"></script>
+<script>
+    function cerrarSesion() { window.location.href = 'index.html'; }
+</script>
 
+<main class="main-content">
+    <header>
+        <h1>Registro de Personal</h1>
+        <p>Complete los datos para dar de alta un nuevo perfil en el sistema.</p>
+    </header>
+
+    <form id="registroForm">
+        <div class="card">
+            <h3>Datos Personales</h3>
+            <div class="grid-3">
+                <div class="form-group"><label>Jerarquía</label><input type="text" id="jerarquia" required></div>
+                <div class="form-group"><label>Nombre y Apellido</label><input type="text" id="nombre" required></div>
+                <div class="form-group"><label>DNI</label><input type="text" id="dni" required></div>
+                <div class="form-group"><label>CE</label><input type="text" id="ce" required></div>
+                
+                <div class="form-group"><label>F. Nacimiento</label><input type="date" id="fechaNac" required></div>
+                
+                <div class="form-group">
+                    <label>Edad</label>
+                    <input type="text" id="edad" placeholder="-- años" readonly style="background-color: #f0f0f0; font-weight: bold; color: var(--primary);">
+                </div>
+
+                <div class="form-group"><label>Teléfono</label><input type="tel" id="telefono" required></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Composición Corporal Inicial</h3>
+            <div class="grid-3">
+                <div class="form-group"><label>Peso (kg)</label><input type="number" step="0.1" id="peso" required></div>
+                <div class="form-group"><label>Talla (m)</label><input type="number" step="0.01" id="talla" required></div>
+                <div class="form-group"><label>% Músculo</label><input type="number" step="0.1" id="musculo" required></div>
+                <div class="form-group"><label>% Grasa</label><input type="number" step="0.1" id="grasa" required></div>
+                <div class="form-group"><label>kg Masa Osea</label><input type="number" step="0.1" id="osea" required></div>
+                <div class="form-group"><label>% Agua Corporal</label><input type="number" step="0.1" id="agua" required></div>
+            </div>
+            
+            <div class="form-group">
+                <label>Novedades / Observaciones Iniciales</label>
+                <textarea id="novedades" rows="3" placeholder="Antecedentes médicos o comentarios..."></textarea>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn-accion" style="background:var(--secondary); text-align: center;">
+                <i class="fas fa-save"></i> Guardar Registro
+            </button>
+            <button type="reset" class="btn-accion" style="background:var(--accent); width: 150px;">
+                <i class="fas fa-trash"></i> Limpiar
+            </button>
+        </div>
+    </form>
+</main>
+
+<script type="module" src="script.js"></script>
 </body>
 </html>
